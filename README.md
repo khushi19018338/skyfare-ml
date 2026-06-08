@@ -1,53 +1,110 @@
- # Flight Price Predictor
+# SkyFareML ✈️
 
 ## Overview
 
-The **Flight Price Predictor** is a web application built with Flask that predicts flight prices based on various parameters such as airline, source and destination cities, departure and arrival times, stops, and flight class. This project leverages machine learning techniques to provide users with an estimate of flight prices, helping them make informed travel decisions.
-## Why I Created This?
+**SkyFareML** is a machine learning-powered web application that predicts airline ticket prices based on various travel parameters such as airline, source city, destination city, departure and arrival times, number of stops, and travel class.
 
-I created this project to showcase my knowledge of developing a simple linear regression model and deploying it for real-world use cases. It demonstrates my ability to integrate machine learning into a web application, providing a practical solution for predicting flight prices.
+The application combines machine learning and Flask to provide users with estimated flight prices and help them make informed travel decisions.
+
+---
 
 ## Features
 
-- User-friendly interface to input flight details
-- Machine learning model trained on flight pricing data
-- Beautiful and responsive design
-- Integration with Unsplash API for dynamic background images
-- Frosted glass effect for a modern and stylish look
+- ✈️ Flight price prediction using Machine Learning
+- 📍 Source and destination city selection
+- 🕒 Departure and arrival time analysis
+- 🛑 Number of stops consideration
+- 💺 Economy and Business class support
+- 🎨 Clean and responsive user interface
+- 🌄 Dynamic background images using the Unsplash API
 
-## Technologies Used
+---
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Python, Flask
-- **Machine Learning**: Scikit-learn, Pandas, NumPy
-- **Deployment**: Render
-- **API Integration**: Unsplash API for background images
+## Tech Stack
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+
+### Backend
+- Python
+- Flask
+
+### Machine Learning
+- Scikit-learn
+- Pandas
+- NumPy
+
+### Deployment
+- Render
+
+### API Integration
+- Unsplash API
+
+---
 
 ## Installation
 
-To run this project locally, follow these steps:
+### Clone the Repository
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/skyfare-ml.git
-   cd skyfare-ml
+```bash
+git clone https://github.com/khushi19018338/skyfare-ml.git
+cd skyfare-ml
+```
 
-
-### Install the required packages:
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
-Set your Unsplash API access key:
 
-Sign up at Unsplash and create a new application to get your API key.
-
-Replace **YOUR_UNSPLASH_ACCESS_KEY** in the JavaScript code with your actual API key.
-Run the application:
+### Run the Application
 
 ```bash
-Copy code
 python app.py
 ```
-Open your browser and go to http://127.0.0.1:5000/ 
-to view the application.
+
+Open your browser and visit:
+
+```
+http://127.0.0.1:5000/
+```
+
+---
+
+## Project Structure
+
+```
+skyfare-ml/
+│
+├── app.py
+├── requirements.txt
+├── templates/
+├── static/
+├── model.pkl
+├── dataset/
+└── README.md
+```
+
+---
+
+## Future Improvements
+
+- 📈 Flight price trend visualization
+- 🤖 Advanced ML models and hyperparameter tuning
+- 📊 Feature importance analysis
+- 🌐 Cloud deployment
+- 📱 Improved UI and responsiveness
+
+---
+
+## Author
+
+**Khushi Kesarwani**
+
+GitHub: https://github.com/khushi19018338
+
+---
+
+⭐ If you found this project interesting, consider giving it a star!
