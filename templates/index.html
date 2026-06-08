@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Predictor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        h1 {
+            text-align: center;
+            text-transform: uppercase; /* Makes the text all uppercase */
+            color: #f8f9fa; /* Change to a light color for better visibility */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds a shadow for better contrast */
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for a modern look */
+            background: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    backdrop-filter: blur(10px); /* Blurs content behind the element */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 10px; /* Rounded corners for a smooth look */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+        }
+        label {
+            display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Makes the label text bold */
+    color: #ffffff; /* Light color for dark backgrounds */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Adds a shadow for better contrast */
+    font-size: 1.1em; /* Increases font size for better readability */
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border color and shadow */
+        }
+        input[type="text"]:hover,
+        input[type="number"]:hover,
+        select:hover {
+            border-color: #4A90E2; /* Highlight border on hover */
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Subtle shadow on hover */
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #4A90E2; /* Highlight border on focus */
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Shadow on focus */
+        }
+        input[type="submit"] {
+            background-color: #4A90E2; /* Primary button color */
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and scale */
+        }
+        input[type="submit"]:hover {
+            background-color: #357ABD; /* Darker shade on hover */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            text-transform: uppercase; /* Makes the text all uppercase */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds a shadow for better contrast */
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem; /* Responsive heading size */
+            }
+            form {
+                padding: 15px; /* Reduced padding for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Flight Price Predictor</h1>
+    <form action="/predict" method="post">
+        
+        <label for="airline">Select Airline:</label>
+        <select id="airline" name="airline" required>
+            {% for airline in airlines %}
+                <option value="{{ airline.code }}">{{ airline.display }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="source_city">Source City:</label>
+        <select id="source_city" name="source_city" required>
+            {% for city in source_cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="departure_time">Select Departure Time:</label>
+        <select id="departure_time" name="departure_time" required>
+            {% for time in dep_arr_time %}
+                <option value="{{ time.code }}">{{ time.display }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="stops">Number of Stops:</label>
+        <select id="stops" name="stops" required>
+            <option value="zero">Zero</option>
+            <option value="one">One</option>
+            <option value="two_or_more">Two or more</option>
+        </select>
+
+        <label for="arrival_time">Select Arrival Time:</label>
+        <select id="arrival_time" name="arrival_time" required>
+            {% for time in dep_arr_time %}
+                <option value="{{ time.code }}">{{ time.display }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="destination">Destination City:</label>
+        <select id="destination" name="destination" required>
+            {% for city in destination_cities %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="class">Flight Class:</label>
+        <select id="class" name="class" required>
+            <option value="Economy">Economy</option>
+            <option value="Business">Business</option>
+        </select>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+    {% endif %}
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Fetch and apply a background image from Unsplash
+        async function fetchBackgroundImage() {
+            try {
+                const accessKey = "{{ unsplash_access_key }}"; // Access the variable from Flask
+
+                const response = await fetch(`https://api.unsplash.com/photos/random?query=airplane&client_id=${accessKey}`);
+                const data = await response.json();
+                document.body.style.backgroundImage = `url(${data.urls.full})`;
+            } catch (error) {
+                console.error('Error fetching image:', error);
+            }
+        }
+
+        fetchBackgroundImage();
+    </script>
+</body>
+</html>
