@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: flight-price-predictor
+    name: skyfare-ml
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
